@@ -139,3 +139,6 @@ if [ -f '/home/leo/workspace/build/google-cloud-sdk/path.bash.inc' ]; then . '/h
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/home/leo/workspace/build/google-cloud-sdk/completion.bash.inc' ]; then . '/home/leo/workspace/build/google-cloud-sdk/completion.bash.inc'; fi
+
+# setup fzf bash configuration
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
