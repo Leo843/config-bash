@@ -13,6 +13,8 @@ esac
 
 # fix library path with user libraries
 export LD_LIBRARY_PATH=~/.local/lib
+# set path
+export PATH=$PATH:$HOME/.local/bin
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
