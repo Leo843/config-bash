@@ -2,5 +2,6 @@
 /*
 # except
 !.bashrc
+!.bash_aliases
 !.dircolors
 !.gitignore
