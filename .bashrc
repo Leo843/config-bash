@@ -10,7 +10,30 @@ esac
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# load extensions
-for file in ~/.bash/extensions/*; do
-  source "$file"
-done
+get_extensions_dir() {
+  local DIR
+
+  DIR=~/.bash/extensions
+  if [[ -d "$DIR" ]]; then
+    echo "$DIR"
+    exit 0
+  fi
+
+  DIR=~/.config/bash/extensions
+  if [[ -d "$DIR" ]]; then
+    echo "$DIR"
+    exit 0
+  fi
+
+  exit 1
+}
+
+EXTENSIONS_DIR=$(get_extensions_dir)
+if [[ $? ]]; then
+  # load extensions
+  for file in "$EXTENSIONS_DIR"/*; do
+    source "$file"
+  done
+else
+  echo "WARNING No extensions directory found! No extensions loaded!"
+fi
