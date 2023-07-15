@@ -1,12 +1,25 @@
 #!/bin/bash
 
-# enable color support of ls and also add handy aliases
+# enable colors
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.bash/.dircolors && eval "$(dircolors -b ~/.bash/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -v --color=auto --group-directories-first'
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-else
-    alias ls='ls -v --group-directories-first'
+
+  get_dircolors_file() {
+    local FILE
+
+    FILE=~/.bash/.dircolors
+    if [[ -f "$FILE" ]]; then
+      echo "$FILE"
+      exit 0
+    fi
+
+    FILE=~/.config/bash/.dircolors
+    if [[ -f "$FILE" ]]; then
+      echo "$FILE"
+      exit 0
+    fi
+
+    exit 1
+  }
+
+  eval "$(dircolors -b $(get_dircolors_file))" || eval "$(dircolors -b)"
 fi
