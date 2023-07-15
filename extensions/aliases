@@ -19,6 +19,9 @@ alias copy='xclip -sel clip'
 # shortcuts
 alias q='exit'
 alias v='nvim'
+alias k='kubectl'
+alias tf='terraform'
+alias d='docker'
 
 # list content after cd
 if [[ "$(exa > /dev/null 2>&1; echo $?)" = "0" ]]; then
