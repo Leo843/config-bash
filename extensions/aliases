@@ -19,3 +19,14 @@ alias copy='xclip -sel clip'
 # shortcuts
 alias q='exit'
 alias v='nvim'
+
+# list content after cd
+if [[ "$(exa > /dev/null 2>&1; echo $?)" = "0" ]]; then
+  function cd () {
+    builtin cd "$@" && exa
+  }
+else
+  function cd () {
+    builtin cd "$@" && ls
+  }
+fi
