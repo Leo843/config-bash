@@ -5,8 +5,10 @@ alias ls='ls --all --color=auto --group-directories-first'
 alias l='ls -l'
 
 # exa
-alias exa='exa --color=automatic --all --sort=Name --group-directories-first'
-alias e='exa --long'
+if type exa > /dev/null 2>&1; then
+  alias exa='exa --color=automatic --all --sort=Name --group-directories-first'
+  alias e='exa --long'
+fi
 
 # grep
 alias grep='grep --color=auto'
@@ -14,17 +16,26 @@ alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
 
 # pipe command output to clipboard
-alias copy='xclip -sel clip'
+if type xclip > /dev/null 2>&1; then
+  alias copy='xclip -sel clip'
+fi
 
 # shortcuts
 alias q='exit'
 alias v='nvim'
-alias k='kubectl'
-alias tf='terraform'
-alias d='docker'
+
+if type kubectl > /dev/null 2>&1; then
+  alias k='kubectl'
+fi
+if type terraform > /dev/null 2>&1; then
+  alias tf='terraform'
+fi
+if type docker > /dev/null 2>&1; then
+  alias d='docker'
+fi
 
 # list content after cd
-if [[ "$(exa > /dev/null 2>&1; echo $?)" = "0" ]]; then
+if type exa > /dev/null 2>&1; then
   function cd () {
     builtin cd "$@" && exa
   }
