@@ -10,6 +10,14 @@ esac
 # of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# Path to local binaries managed by the user.
+USER_BIN=~/.local/bin
+export PATH=${PATH:+${PATH}:}$USER_BIN
+
+# Path to local libraries managed by the user.
+USER_LIB=~/.local/lib
+export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}$USER_LIB
+
 # Store the path to the directory for bash configuration files for later use.
 ROOT_BASH=~/.config/bash
 
