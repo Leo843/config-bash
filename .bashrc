@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-# If not running interactively, don't do anything
+# If bash is not running interactively, don't do anything.
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
+# Check the window size after each command and, if necessary, update the values
+# of LINES and COLUMNS.
 shopt -s checkwinsize
 
 get_extensions_dir() {
