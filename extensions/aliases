@@ -33,3 +33,8 @@ else
     builtin cd "$@" && ls
   }
 fi
+
+# keyboard layouts
+alias nocaps='setxkbmap -option "ctrl:nocaps"'
+alias qwer='setxkbmap fr'
+alias azer='setxkbmap us'
