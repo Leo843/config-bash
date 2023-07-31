@@ -10,30 +10,17 @@ esac
 # of LINES and COLUMNS.
 shopt -s checkwinsize
 
-get_extensions_dir() {
-  local DIR
+# Store the path to the directory for bash configuration files for later use.
+ROOT_BASH=~/.config/bash
 
-  DIR=~/.bash/extensions
-  if [[ -d "$DIR" ]]; then
-    echo "$DIR"
-    exit 0
-  fi
-
-  DIR=~/.config/bash/extensions
-  if [[ -d "$DIR" ]]; then
-    echo "$DIR"
-    exit 0
-  fi
-
+# Abort bash configuration when the configuration file is not at the expected
+# location.
+if [[ ! -f "$ROOT_BASH/.bashrc" ]]; then
+  echo "ERROR .bashrc must be located at $ROOT_BASH/.bashrc"
   exit 1
-}
-
-EXTENSIONS_DIR=$(get_extensions_dir)
-if [[ $? ]]; then
-  # load extensions
-  for file in "$EXTENSIONS_DIR"/*; do
-    source "$file"
-  done
-else
-  echo "WARNING No extensions directory found! No extensions loaded!"
 fi
+
+# load extensions
+for file in "$ROOT_BASH/extensions/"*; do
+  source "$file"
+done
