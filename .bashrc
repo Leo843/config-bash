@@ -1,14 +1,28 @@
 #!/usr/bin/env bash
 
-# If bash is not running interactively, don't do anything.
-case $- in
-    *i*) ;;
-      *) return;;
-esac
+# Set the path to bash configuration files.
+ROOT_BASH=~/.config/bash
 
-# Check the window size after each command and, if necessary, update the values
-# of LINES and COLUMNS.
-shopt -s checkwinsize
+# If bash is running interactively
+case $- in
+  *i*)
+    # Try to run zsh over bash
+    # if [ -x "$(which zsh)" ]; then
+    #   export SHELL=$(which zsh)
+    #   exec zsh
+    # fi
+
+    # Check the window size after each command and, if necessary, update the
+    # values of LINES and COLUMNS.
+    shopt -s checkwinsize
+
+    # Load scripts for interactive usage
+    source "$ROOT_BASH/extensions/autocomplete"
+    source "$ROOT_BASH/extensions/colors"
+    source "$ROOT_BASH/extensions/editor"
+    source "$ROOT_BASH/extensions/prompt"
+    ;;
+esac
 
 # Path to local binaries managed by the user.
 USER_BIN=~/.local/bin
@@ -18,17 +32,5 @@ export PATH=${PATH:+${PATH}:}$USER_BIN
 USER_LIB=~/.local/lib
 export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}$USER_LIB
 
-# Store the path to the directory for bash configuration files for later use.
-ROOT_BASH=~/.config/bash
-
-# Abort bash configuration when the configuration file is not at the expected
-# location.
-if [[ ! -f "$ROOT_BASH/.bashrc" ]]; then
-  echo "ERROR .bashrc must be located at $ROOT_BASH/.bashrc"
-  exit 1
-fi
-
-# load extensions
-for file in "$ROOT_BASH/extensions/"*; do
-  source "$file"
-done
+source "$ROOT_BASH/extensions/aliases"
+source "$ROOT_BASH/extensions/history"
