@@ -25,12 +25,14 @@ case $- in
 esac
 
 # Path to local binaries managed by the user.
-USER_BIN=~/.local/bin
-export PATH=${PATH:+${PATH}:}$USER_BIN
+if [[ ! "$PATH" =~ (^|:)$HOME/.local/bin(:|$) ]]; then
+  export PATH="${PATH:+${PATH}:}$HOME/.local/bin"
+fi
 
 # Path to local libraries managed by the user.
-USER_LIB=~/.local/lib
-export LD_LIBRARY_PATH=${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}$USER_LIB
+if [[ ! "$LD_LIBRARY_PATH" =~ (^|:)$HOME/.local/lib(:|$) ]]; then
+  export LD_LIBRARY_PATH="${LD_LIBRARY_PATH:+${LD_LIBRARY_PATH}:}$HOME/.local/lib"
+fi
 
 source "$ROOT_BASH/extensions/aliases"
 source "$ROOT_BASH/extensions/history"
